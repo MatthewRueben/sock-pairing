@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 /**
- * Tests an algorithm that MatchesSocks.
+ * Tests pairing algorithms -- e.g., on socks.
  *
  * @author Matt Rueben
  */
