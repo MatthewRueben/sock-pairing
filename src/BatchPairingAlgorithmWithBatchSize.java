@@ -17,7 +17,6 @@ public class BatchPairingAlgorithmWithBatchSize
     public ComparisonsCounts pair(List<Matchable> objects)
     {
         ComparisonsCounter counter = new ComparisonsCounter();
-        System.out.println(batchSize); // Testing that this compiles.
         // matchSocks here.
         // counter.add(1); // Do this each time you make a comparison.
         return counter.count();
