@@ -29,8 +29,8 @@ public class SockMatcherTester
         
         pairingAlgorithm.pair(socks);
     }
-    
-    public static void testTheThreeMatchers()
+
+    public static void main(String[] args)
     {
         /* 
          * Each SockMatcherTester object puts one sockMatcher 
