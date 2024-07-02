@@ -17,7 +17,7 @@ public class SockMatcherTester
     //}
     private static void testAlgorithm(PairingAlgorithm pairingAlgorithm) {
         int numPairs = 30;
-        List<MatchableByNumber> socks = new ArrayList<>(numPairs*2);
+        List<Matchable> socks = new ArrayList<>(numPairs*2);
         for (int pair = 0; pair < numPairs; pair++) {
             socks.add(new MatchableByNumber(pair)); // First sock in pair.
             socks.add(new MatchableByNumber(pair)); // Second sock in pair.
