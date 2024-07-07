@@ -40,23 +40,11 @@ public class SockMatcherTester
          * permutations of (2) each number of pairs 
          * of socks from 1 to 100. 
          */
-
         
         //testAYGMatcher.sweepByNumPairs(minNumPairs, maxNumPairs);
         //testAYGMatcher.test(numPairs);
         
-        
-        // DECIDE WHICH OF THESE TWO EXPRESSIONS I PREFER:
-        
-        // 1. enum of algorithms all implementing an interface
-        // Pro: can refer directly to the algorithm. 
-        // Pro: might allow for parameterization, e.g., of batch matcher.
-        // Con: must name the collection of algorithms.
-        // Con: cannot separate algorithms into separate files. 
-        //testAlgorithm(PairingAlgorithmsByMatt.AS_YOU_GO);
-        //testAlgorithm(PairingAlgorithmsByMatt.BATCH);
-        
-        // 2. assigning method reference to functional interface
+        // assigning method reference to functional interface
         // Pro: still enforces the method signature via the interface.
         // Con: must refer to the method instead of the algorithm.
         testAlgorithm(AsYouGoPairingAlgorithm::pair);
