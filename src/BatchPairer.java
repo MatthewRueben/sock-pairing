@@ -8,10 +8,14 @@ import java.util.List;
  */
 public class BatchPairer implements PairingAlgorithm
 {
-    private int batchSize = 5;
+    private final int batchSize;
 
-    public void setBatchSize(int batchSize) {this.batchSize = batchSize;}
-    
+    private BatchPairer(int batchSize) {this.batchSize = batchSize;}
+
+    public static BatchPairer makeBatchPairerWithBatchSize(int batchSize) {
+        return new BatchPairer(batchSize);
+    }
+
     public ComparisonsCounts pair(List<Matchable> objects)
     {
         ComparisonsCounter counter = new ComparisonsCounter();

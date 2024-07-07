@@ -44,7 +44,7 @@ public class SockPairerTester
         //testAYGMatcher.test(numPairs);
 
         testAlgorithm(new AsYouGoPairer());
-        testAlgorithm(new BatchPairer()); // REPLACE! Currently defaults to batch size of 5.
+        testAlgorithm(BatchPairer.makeBatchPairerWithBatchSize(5));
         testAlgorithm(new AtTheEndPairer());
 
         
