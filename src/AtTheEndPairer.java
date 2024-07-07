@@ -9,9 +9,9 @@ import java.util.List;
  * 
  * @author Matt Rueben
  */
-public class AtTheEndPairingAlgorithm
+public class AtTheEndPairer implements PairingAlgorithm
 {
-    public static ComparisonsCounts pair(List<Matchable> objects)
+    public ComparisonsCounts pair(List<Matchable> objects)
         {
         ComparisonsCounter counter = new ComparisonsCounter();
         // matchSocks here.

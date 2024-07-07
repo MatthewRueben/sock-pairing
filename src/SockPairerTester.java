@@ -1,5 +1,4 @@
 import java.util.Collections;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 /**
@@ -7,15 +6,15 @@ import java.util.ArrayList;
  *
  * @author Matt Rueben
  */
-public class SockMatcherTester
+public class SockPairerTester
 {
     //private MatchesSocks sockMatcher;
 
-    //public SockMatcherTester(MatchesSocks sockMatcher)
+    //public SockPairerTester(MatchesSocks sockMatcher)
     //{
     //    this.sockMatcher = sockMatcher;  
     //}
-    private static void testAlgorithm(PairingAlgorithm pairingAlgorithm) {
+    private static void testAlgorithm(PairingAlgorithm pairer) {
         int numPairs = 30;
         List<Matchable> socks = new ArrayList<>(numPairs*2);
         for (int pair = 0; pair < numPairs; pair++) {
@@ -27,13 +26,13 @@ public class SockMatcherTester
         Collections.shuffle(socks); // Randomize.
         //System.out.println(socks);
         
-        pairingAlgorithm.pair(socks);
+        pairer.pair(socks);
     }
 
     public static void main(String[] args)
     {
         /* 
-         * Each SockMatcherTester object puts one sockMatcher 
+         * Each SockPairerTester object puts one sockMatcher
          * through its paces. Make several Tester 
          * objects, one for each sockMatcher. Each 
          * one will try the sockMatcher on (1) all 
@@ -43,13 +42,10 @@ public class SockMatcherTester
         
         //testAYGMatcher.sweepByNumPairs(minNumPairs, maxNumPairs);
         //testAYGMatcher.test(numPairs);
-        
-        // assigning method reference to functional interface
-        // Pro: still enforces the method signature via the interface.
-        // Con: must refer to the method instead of the algorithm.
-        testAlgorithm(AsYouGoPairingAlgorithm::pair);
-        testAlgorithm(new BatchPairingAlgorithmWithBatchSize(5)::pair);
-        testAlgorithm(AtTheEndPairingAlgorithm::pair);
+
+        testAlgorithm(new AsYouGoPairer());
+        testAlgorithm(new BatchPairer()); // REPLACE! Currently defaults to batch size of 5.
+        testAlgorithm(new AtTheEndPairer());
 
         
         

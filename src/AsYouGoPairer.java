@@ -1,19 +1,16 @@
 import java.util.List;
 
 /**
- * Like the AtTheEndPairingAlgorithm, but pulls batches 
- * of N at a time instead of the whole pile.
- *
+ * E.g., for pairing socks:
+ * Pulls socks out of the dryer one by one. Each 
+ * time a sock is pulled out, it is compared 
+ * with all currently unpaired socks.   
+ * 
  * @author Matt Rueben
  */
-public class BatchPairingAlgorithmWithBatchSize
+public class AsYouGoPairer implements PairingAlgorithm
 {
-    private int batchSize;
-    
-    BatchPairingAlgorithmWithBatchSize(int batchSize) {
-        this.batchSize = batchSize;
-    }
-    
+    @Override
     public ComparisonsCounts pair(List<Matchable> objects)
     {
         ComparisonsCounter counter = new ComparisonsCounter();
