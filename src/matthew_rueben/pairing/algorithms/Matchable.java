@@ -1,3 +1,5 @@
+package matthew_rueben.pairing.algorithms;
+
 /**
  * @author Matt Rueben
  */
