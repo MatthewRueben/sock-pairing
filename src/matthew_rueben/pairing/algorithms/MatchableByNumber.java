@@ -11,8 +11,8 @@ public class MatchableByNumber implements Matchable<MatchableByNumber>
         this.ID = id;
     }
     
-    public final boolean checkIfMatches(MatchableByNumber candidate) {
-        if (this.ID == candidate.ID) {return true;}
+    public final boolean matches(MatchableByNumber candidate) {
+        if (this.ID == candidate.ID) return true;
         else return false;
     }
     
@@ -20,9 +20,8 @@ public class MatchableByNumber implements Matchable<MatchableByNumber>
         MatchableByNumber sock1a = new MatchableByNumber(1);
         MatchableByNumber sock1b = new MatchableByNumber(1);
         MatchableByNumber sock2a = new MatchableByNumber(2);
-        System.out.println(sock1a.checkIfMatches(sock1b));
-        System.out.println(sock1b.checkIfMatches(sock1a));
-        System.out.println(sock1a.checkIfMatches(sock2a));
-
+        System.out.println(sock1a.matches(sock1b));
+        System.out.println(sock1b.matches(sock1a));
+        System.out.println(sock1a.matches(sock2a));
     }
 }
