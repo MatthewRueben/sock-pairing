@@ -11,7 +11,7 @@ public class ComparisonsCounter
         this.tally += n;
     }
     
-    public ComparisonsCounts count() {
+    public ComparisonsCounts getCounts() {
         ComparisonsCounts counts = new ComparisonsCounts();
         counts.total = this.tally;
         return counts;

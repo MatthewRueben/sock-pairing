@@ -18,6 +18,6 @@ public class AtTheEndPairer implements PairingAlgorithm
         ComparisonsCounter counter = new ComparisonsCounter();
         // matchSocks here.
         // counter.add(1); // Do this each time you make a comparison.
-        return counter.count();
+        return counter.getCounts();
         }
 }
