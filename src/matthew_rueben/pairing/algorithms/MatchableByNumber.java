@@ -6,6 +6,8 @@ package matthew_rueben.pairing.algorithms;
 public class MatchableByNumber implements Matchable<MatchableByNumber>
 {
     public final int ID;
+
+    public String toString() {return String.valueOf(ID);}
     
     public MatchableByNumber(int id) {
         this.ID = id;
