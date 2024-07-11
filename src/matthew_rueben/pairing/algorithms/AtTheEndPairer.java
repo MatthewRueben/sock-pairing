@@ -19,23 +19,23 @@ public class AtTheEndPairer implements PairingAlgorithm
     {
         ComparisonsCounter comparisonsCounter = new ComparisonsCounter();
 
-        Iterator<Matchable> pairablesIterator;
-        while ((pairablesIterator = pairables.iterator()).hasNext()) // Iterator resets to beginning of List every loop.
+        Iterator<Matchable> pairableHandler;
+        while ((pairableHandler = pairables.iterator()).hasNext()) // Iterator resets to beginning of List every loop.
         {
-            final Matchable pairable_1 = pairablesIterator.next();
+            final Matchable pairable_1 = pairableHandler.next();
             System.out.println("First: " + pairable_1);
-            pairablesIterator.remove(); // Removes pairable_1 from pairables.
+            pairableHandler.remove(); // Removes pairable_1 from pairables.
             System.out.println("Removed first.");
 
             boolean noMatchYet = true;
-            while (pairablesIterator.hasNext() && noMatchYet)
+            while (pairableHandler.hasNext() && noMatchYet)
             {
-                final Matchable pairable_2 = pairablesIterator.next();
+                final Matchable pairable_2 = pairableHandler.next();
                 System.out.println("Second: " + pairable_2);
 
                 if (pairable_1.matches(pairable_2))
                 {
-                    pairablesIterator.remove(); // Removes pairable_2 from pairables.
+                    pairableHandler.remove(); // Removes pairable_2 from pairables.
                     System.out.println("Removed second.");
                     noMatchYet = false;
                 }
