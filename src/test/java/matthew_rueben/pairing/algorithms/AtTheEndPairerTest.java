@@ -18,18 +18,17 @@ class AtTheEndPairerTest {
     {
         PairingAlgorithm pairer = new AtTheEndPairer();
 
-        int numPairs = 5;
-        List<Matchable> socks = new ArrayList<>(numPairs*2);
-        for (int pair = 0; pair < numPairs; pair++)
-        {
-            socks.add(new MatchableByNumber(pair)); // First sock in pair.
-        }
-        for (int pair = 0; pair < numPairs; pair++)
-        {
-            socks.add(new MatchableByNumber(pair)); // Second sock in pair.
-        }
+        List<Matchable> socks = new ArrayList<>(6);
+        socks.add(new MatchableByNumber(1));
+        socks.add(new MatchableByNumber(1));
+        socks.add(new MatchableByNumber(2));
+        socks.add(new MatchableByNumber(3));
+        socks.add(new MatchableByNumber(2));
+        socks.add(new MatchableByNumber(3));
+
         ComparisonsCounts counts = pairer.pair(socks);
-        logger.info(counts.total);
-        assertEquals(15, counts.total);
+        logger.info("Total comparisons: {}", counts.total);
+
+        assertEquals(4, counts.total);
     }
 }

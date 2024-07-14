@@ -29,7 +29,6 @@ public class AtTheEndPairer implements PairingAlgorithm
         {
             final Matchable pairable_1 = pairableHandler.next();
             logger.debug("First: {}", pairable_1);
-            logger.warn("WARNING!");
             pairableHandler.remove(); // Removes pairable_1 from pairables.
             logger.debug("Removed first.");
 
