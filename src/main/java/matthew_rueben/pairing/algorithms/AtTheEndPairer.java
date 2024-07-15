@@ -29,7 +29,7 @@ public class AtTheEndPairer implements PairingAlgorithm
         while ((pairableHandler = pairables.iterator()).hasNext()) // Iterator resets to beginning of List every loop.
         {
             final Matchable pairable_1 = pairableHandler.next();
-            logger.debug("First: {}", pairable_1);
+            logger.debug("ID of first: {}", pairable_1);
             pairableHandler.remove(); // Removes pairable_1 from pairables.
             logger.debug("Removed first.");
 
@@ -37,7 +37,7 @@ public class AtTheEndPairer implements PairingAlgorithm
             while (noMatchYet && pairableHandler.hasNext())
             {
                 final Matchable pairable_2 = pairableHandler.next();
-                logger.debug("Second: {}", pairable_2);
+                logger.debug("ID of second: {}", pairable_2);
 
                 if (pairable_1.matches(pairable_2)) {
                     pairableHandler.remove(); // Removes pairable_2 from pairables.
@@ -49,7 +49,7 @@ public class AtTheEndPairer implements PairingAlgorithm
 
             if (noMatchYet)
             {
-                throw new NoMatchRemainingException("for object " + pairable_1);
+                throw new NoMatchRemainingException("for object with ID " + pairable_1);
             }
         }
         return comparisonsCounter.getCounts();

@@ -14,19 +14,19 @@ class AtTheEndPairerTest {
     private static Logger logger = LogManager.getLogger();
 
     @Test
-    void pair()
+    void pairs3PairsWith1Adjacent()
     {
         PairingAlgorithm pairer = new AtTheEndPairer();
 
-        List<Matchable> socks = new ArrayList<>(6);
-        socks.add(new MatchableByNumber(1));
-        socks.add(new MatchableByNumber(1));
-        socks.add(new MatchableByNumber(2));
-        socks.add(new MatchableByNumber(3));
-        socks.add(new MatchableByNumber(2));
-        socks.add(new MatchableByNumber(3));
+        List<Matchable> threePairs = new ArrayList<>(6);
+        threePairs.add(new MatchableByNumber(1));
+        threePairs.add(new MatchableByNumber(1));
+        threePairs.add(new MatchableByNumber(2));
+        threePairs.add(new MatchableByNumber(3));
+        threePairs.add(new MatchableByNumber(2));
+        threePairs.add(new MatchableByNumber(3));
 
-        ComparisonsCounts counts = pairer.pair(socks);
+        ComparisonsCounts counts = pairer.pair(threePairs);
         logger.info("Total comparisons: {}", counts.total);
 
         assertEquals(4, counts.total);
