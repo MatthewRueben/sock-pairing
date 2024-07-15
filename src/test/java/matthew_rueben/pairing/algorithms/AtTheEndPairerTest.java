@@ -31,4 +31,18 @@ class AtTheEndPairerTest {
 
         assertEquals(4, counts.total);
     }
+
+    @Test
+    void throwsWhenNoMatchRemains()
+    {
+        PairingAlgorithm pairer = new AtTheEndPairer();
+
+        List<Matchable> triplets = new ArrayList<>(6);
+        triplets.add(new MatchableByNumber(1));
+        triplets.add(new MatchableByNumber(1));
+        triplets.add(new MatchableByNumber(1));
+
+        assertThrows(NoMatchRemainingException.class,
+                () -> pairer.pair(triplets));
+    }
 }
