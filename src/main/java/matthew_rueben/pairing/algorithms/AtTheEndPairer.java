@@ -21,6 +21,7 @@ public class AtTheEndPairer implements PairingAlgorithm
     private static Logger logger = LogManager.getLogger();
 
     public ComparisonsCounts pair(List<Matchable> pairables)
+            throws NoMatchRemainingException
     {
         ComparisonsCounter comparisonsCounter = new ComparisonsCounter();
 
@@ -33,18 +34,22 @@ public class AtTheEndPairer implements PairingAlgorithm
             logger.debug("Removed first.");
 
             boolean noMatchYet = true;
-            while (pairableHandler.hasNext() && noMatchYet)
+            while (noMatchYet && pairableHandler.hasNext())
             {
                 final Matchable pairable_2 = pairableHandler.next();
                 logger.debug("Second: {}", pairable_2);
 
-                if (pairable_1.matches(pairable_2))
-                {
+                if (pairable_1.matches(pairable_2)) {
                     pairableHandler.remove(); // Removes pairable_2 from pairables.
                     logger.debug("Removed second.");
                     noMatchYet = false;
                 }
                 comparisonsCounter.add(1);
+            }
+
+            if (noMatchYet)
+            {
+                throw new NoMatchRemainingException("for object " + pairable_1);
             }
         }
         return comparisonsCounter.getCounts();
