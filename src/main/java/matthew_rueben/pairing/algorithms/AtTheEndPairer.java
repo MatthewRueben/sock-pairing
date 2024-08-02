@@ -39,7 +39,8 @@ public class AtTheEndPairer implements PairingAlgorithm
                 final Matchable pairable_2 = pairableHandler.next();
                 logger.debug("ID of second: {}", pairable_2);
 
-                if (pairable_1.matches(pairable_2)) {
+                if (pairable_1.matches(pairable_2))
+                {
                     pairableHandler.remove(); // Removes pairable_2 from pairables.
                     logger.debug("Removed second.");
                     noMatchYet = false;
