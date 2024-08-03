@@ -45,7 +45,7 @@ public class SockPairerTester
         //testAYGMatcher.sweepByNumPairs(minNumPairs, maxNumPairs);
 
         tester.testAlgorithm(new AsYouGoPairer());
-        tester.testAlgorithm(BatchPairer.makeBatchPairerWithBatchSize(5));
+        //tester.testAlgorithm(BatchPairer.makeBatchPairerWithBatchSize(5));
         tester.testAlgorithm(new AtTheEndPairer());
     }
 }
