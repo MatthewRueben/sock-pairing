@@ -23,7 +23,9 @@ public class SockPairerTester
         this.maxNumOfPairs = newMax;
     }
 
-    public void testAlgorithm(PairingAlgorithm pairer) {
+    public void testAlgorithm(PairingAlgorithm pairer)
+    {
+        logger.info("Testing {}.", pairer);
         int numPairs = this.maxNumOfPairs; // Later will add sweep functionality, from 1 to max.
         List<Matchable> socks = new ArrayList<>(numPairs*2);
         for (int pair = 0; pair < numPairs; pair++) {
@@ -34,7 +36,7 @@ public class SockPairerTester
         logger.debug(socks);
 
         ComparisonsCounts counts = pairer.pair(socks);
-        logger.info("Total comparisons: {}", counts.total);
+        logger.info("Total comparisons: {}.", counts.total);
     }
 
     public static void main(String[] args)

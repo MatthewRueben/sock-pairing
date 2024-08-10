@@ -19,6 +19,8 @@ public class AsYouGoPairer implements PairingAlgorithm
 {
     private static Logger logger = LogManager.getLogger();
 
+    public String toString() {return "As-You-Go Pairer";}
+
     public ComparisonsCounts pair(List<Matchable> pairablesHidden)
             throws NoMatchRemainingException
     {

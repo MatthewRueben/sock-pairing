@@ -20,6 +20,8 @@ public class AtTheEndPairer implements PairingAlgorithm
 {
     private static Logger logger = LogManager.getLogger();
 
+    public String toString() {return "At-The-End Pairer";}
+
     public ComparisonsCounts pair(List<Matchable> pairables)
             throws NoMatchRemainingException
     {
