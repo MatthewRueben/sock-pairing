@@ -12,6 +12,6 @@ import java.util.List;
 @FunctionalInterface
 public interface PairingAlgorithm
 {
-    ComparisonsCounts pair(List<Matchable> objects)
+    ComparisonsCounts pair(List<? extends Matchable> objects)
             throws NoMatchRemainingException;
 }

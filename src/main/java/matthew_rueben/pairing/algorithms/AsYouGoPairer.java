@@ -21,7 +21,7 @@ public class AsYouGoPairer implements PairingAlgorithm
 
     public String toString() {return "As-You-Go Pairer";}
 
-    public ComparisonsCounts pair(List<Matchable> pairablesHidden)
+    public ComparisonsCounts pair(List<? extends Matchable> pairablesHidden)
             throws NoMatchRemainingException
     {
         ComparisonsCounter comparisonsCounter = new ComparisonsCounter();

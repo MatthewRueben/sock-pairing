@@ -22,12 +22,12 @@ public class AtTheEndPairer implements PairingAlgorithm
 
     public String toString() {return "At-The-End Pairer";}
 
-    public ComparisonsCounts pair(List<Matchable> pairables)
+    public ComparisonsCounts pair(List<? extends Matchable> pairables)
             throws NoMatchRemainingException
     {
         ComparisonsCounter comparisonsCounter = new ComparisonsCounter();
 
-        Iterator<Matchable> pairableHandler;
+        Iterator<? extends Matchable> pairableHandler;
         while ((pairableHandler = pairables.iterator()).hasNext()) // Iterator resets to beginning of List every loop.
         {
             final Matchable pairable_1 = pairableHandler.next();

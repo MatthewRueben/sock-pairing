@@ -42,17 +42,24 @@ public class SockPairerTester
     public void testAlgorithm(PairingAlgorithm pairer)
     {
         logger.info("Testing {}.", pairer);
+
         int numPairs = this.maxNumOfPairs; // Later will add sweep functionality, from 1 to max.
         List<MatchableByNumber> socks = new ArrayList<>(numPairs*2);
         for (int pairID = 1; pairID <= numPairs; pairID++) {
             socks.add(new MatchableByNumber(pairID)); // First sock in pair.
             socks.add(new MatchableByNumber(pairID)); // Second sock in pair.
         }
-        for (List<MatchableByNumber> sockOrdering : orderedPermutations(socks))
+
+        for (List<MatchableByNumber> sockSequence : orderedPermutations(socks))
         {
-            logger.debug(sockOrdering);
-            //ComparisonsCounts counts = pairer.pair(sockOrdering);
-            //logger.info("Total comparisons: {}.", counts.total);
+            List<MatchableByNumber> copyOfSockSequence = new ArrayList<>(numPairs*2);
+            for (MatchableByNumber sock : sockSequence)
+            {
+                copyOfSockSequence.add(new MatchableByNumber(sock.ID));
+            }
+            logger.debug(copyOfSockSequence);
+            ComparisonsCounts comparisons = pairer.pair(copyOfSockSequence);
+            logger.info("Comparisons: {}.", comparisons.total);
         }
     }
 
