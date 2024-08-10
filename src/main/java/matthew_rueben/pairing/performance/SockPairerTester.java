@@ -1,12 +1,17 @@
 package matthew_rueben.pairing.performance;
 
 import matthew_rueben.pairing.algorithms.*;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+
+import static com.google.common.collect.Collections2.orderedPermutations;
+
 /**
  * Tests pairing algorithms -- e.g., on socks.
  *
@@ -23,26 +28,38 @@ public class SockPairerTester
         this.maxNumOfPairs = newMax;
     }
 
+    //private void makeSocksFrom(listOfIDs);
+
+    //private void generateIDs(numberOfPairs, orderNumber?);
+    // Say we start with {1,2,3}.
+    // That's the first permutation.
+    // Now swap the last two.
+    // Now swap them back and swap
+
+    // Use Guava's OrderedPermutationIterator?
+
+    // TO CHANGE: will want to pass in *all* the pairers at once so we don't have to do permutations multiple times.
     public void testAlgorithm(PairingAlgorithm pairer)
     {
         logger.info("Testing {}.", pairer);
         int numPairs = this.maxNumOfPairs; // Later will add sweep functionality, from 1 to max.
-        List<Matchable> socks = new ArrayList<>(numPairs*2);
-        for (int pair = 0; pair < numPairs; pair++) {
-            socks.add(new MatchableByNumber(pair)); // First sock in pair.
-            socks.add(new MatchableByNumber(pair)); // Second sock in pair.
+        List<MatchableByNumber> socks = new ArrayList<>(numPairs*2);
+        for (int pairID = 1; pairID <= numPairs; pairID++) {
+            socks.add(new MatchableByNumber(pairID)); // First sock in pair.
+            socks.add(new MatchableByNumber(pairID)); // Second sock in pair.
         }
-        Collections.shuffle(socks); // Randomize.
-        logger.debug(socks);
-
-        ComparisonsCounts counts = pairer.pair(socks);
-        logger.info("Total comparisons: {}.", counts.total);
+        for (List<MatchableByNumber> sockOrdering : orderedPermutations(socks))
+        {
+            logger.debug(sockOrdering);
+            //ComparisonsCounts counts = pairer.pair(sockOrdering);
+            //logger.info("Total comparisons: {}.", counts.total);
+        }
     }
 
     public static void main(String[] args)
     {
         SockPairerTester tester = new SockPairerTester();
-        tester.setMaxNumOfPairsTo(30);
+        tester.setMaxNumOfPairsTo(3);
 
         //testAYGMatcher.sweepByNumPairs(minNumPairs, maxNumPairs);
 
