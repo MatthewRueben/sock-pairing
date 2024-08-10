@@ -20,17 +20,19 @@ public class AtTheEndPairer implements PairingAlgorithm
 {
     private static Logger logger = LogManager.getLogger();
 
+    @Override
     public String toString() {return "At-The-End Pairer";}
 
-    public ComparisonsCounts pair(List<? extends Matchable> pairables)
+    @Override
+    public <MatchableImplementation extends Matchable<MatchableImplementation>> ComparisonsCounts pair(List<MatchableImplementation> pairables)
             throws NoMatchRemainingException
     {
         ComparisonsCounter comparisonsCounter = new ComparisonsCounter();
 
-        Iterator<? extends Matchable> pairableHandler;
+        Iterator<MatchableImplementation> pairableHandler;
         while ((pairableHandler = pairables.iterator()).hasNext()) // Iterator resets to beginning of List every loop.
         {
-            final Matchable pairable_1 = pairableHandler.next();
+            final MatchableImplementation pairable_1 = pairableHandler.next();
             logger.debug("ID of first: {}", pairable_1);
             pairableHandler.remove(); // Removes pairable_1 from pairables.
             logger.debug("Removed first.");
@@ -38,7 +40,7 @@ public class AtTheEndPairer implements PairingAlgorithm
             boolean noMatchYet = true;
             while (noMatchYet && pairableHandler.hasNext())
             {
-                final Matchable pairable_2 = pairableHandler.next();
+                final MatchableImplementation pairable_2 = pairableHandler.next();
                 logger.debug("ID of second: {}", pairable_2);
 
                 if (pairable_1.matches(pairable_2))
