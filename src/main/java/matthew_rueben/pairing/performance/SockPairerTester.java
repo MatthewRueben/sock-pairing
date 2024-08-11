@@ -5,8 +5,6 @@ import matthew_rueben.pairing.algorithms.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -27,16 +25,6 @@ public class SockPairerTester
     {
         this.maxNumOfPairs = newMax;
     }
-
-    //private void makeSocksFrom(listOfIDs);
-
-    //private void generateIDs(numberOfPairs, orderNumber?);
-    // Say we start with {1,2,3}.
-    // That's the first permutation.
-    // Now swap the last two.
-    // Now swap them back and swap
-
-    // Use Guava's OrderedPermutationIterator?
 
     // TO CHANGE: will want to pass in *all* the pairers at once so we don't have to do permutations multiple times.
     public void testAlgorithm(PairingAlgorithm pairer)
