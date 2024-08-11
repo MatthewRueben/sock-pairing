@@ -27,7 +27,7 @@ public class SockPairerTester
     }
 
     // TO CHANGE: will want to pass in *all* the pairers at once so we don't have to do permutations multiple times.
-    public void testAlgorithm(PairingAlgorithm pairer)
+    public void testAlgorithm(final PairingAlgorithm pairer)
     {
         logger.info("Testing {}.", pairer);
 
