@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class AtTheEndPairer implements PairingAlgorithm
 {
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
     @Override
     public String toString() {return "At-The-End Pairer";}

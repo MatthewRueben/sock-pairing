@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class AtTheEndPairerTest {
 
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
     @Test
     void pairs3PairsWith1Adjacent()

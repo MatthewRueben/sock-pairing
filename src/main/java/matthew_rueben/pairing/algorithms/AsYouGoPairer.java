@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class AsYouGoPairer implements PairingAlgorithm
 {
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
     @Override
     public String toString() {return "As-You-Go Pairer";}
