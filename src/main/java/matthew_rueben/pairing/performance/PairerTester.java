@@ -19,9 +19,9 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
 {
     private static final Logger logger = LogManager.getLogger();
 
-    private final MatchablePool<CM> pool;
+    private final Matchable.Pool<CM> pool;
     
-    PairerTester(MatchablePool<CM> pool) {this.pool = pool;}
+    PairerTester(Matchable.Pool<CM> pool) { this.pool = pool; }
 
     private void getPermutations(List<CM> in)
     {
@@ -53,7 +53,7 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
     
     public static void main(String[] args)
     {
-        MatchableByNumberPool pool = new MatchableByNumberPool();
+        MatchableByNumber.Pool pool = new MatchableByNumber.Pool();
         PairerTester<MatchableByNumber> tester = new PairerTester<>(pool);
 
         //testAYGMatcher.sweepByNumPairs(minNumPairs, maxNumPairs);
