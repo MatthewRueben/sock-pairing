@@ -22,9 +22,9 @@ public class MatchableByNumberPool extends MatchablePool<MatchableByNumber>
         return newInstance;
     }
 
-    public MatchableByNumber getNewUnmatchedInstance()
+    public MatchableByNumber makeNewUnmatchedInstance()
     { return this.makeNewInstanceWithID(this.getAnUnmatchedID()); }
 
-    public MatchableByNumber getNewInstanceThatMatches(MatchableByNumber mbnToMatch)
+    public MatchableByNumber makeNewInstanceThatMatches(MatchableByNumber mbnToMatch)
     { return this.makeNewInstanceWithID(mbnToMatch.ID); }
 }

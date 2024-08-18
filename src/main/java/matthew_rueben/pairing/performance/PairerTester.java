@@ -28,18 +28,10 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
 
     }
 
-    private List<CM> makePairs(int numPairs)
+    private void makePair()
     {
-        List<CM> pairsList = new ArrayList<>(numPairs*2);
-        
-        for (int i = 1; i <= numPairs; i++)
-        {
-            CM instance1of2 = pool.getNewUnmatchedInstance();
-            pairsList.add(instance1of2);
-            CM instance2of2 = pool.getNewInstanceThatMatches(instance1of2);
-            pairsList.add(instance2of2);
-        }
-        return pairsList;
+        CM instance1of2 = pool.makeNewUnmatchedInstance();
+        pool.makeNewInstanceThatMatches(instance1of2);
     }
 
     // Might want to pass in *all* the pairers at once so we don't have to do permutations multiple times.
@@ -48,7 +40,8 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
         logger.info("Testing {}.", pairer);
 
         int numPairs = maxNumOfPairs; // Later will add sweep functionality, from 1 to max.
-        List<CM> pairs = makePairs(numPairs);
+        for (int i = 1; i <= numPairs; i++) { makePair(); }
+        List<CM> pairs = pool.getAllCurrentInstances();
 
         for (List<CM> reorderedPairs : orderedPermutations(pairs)) // That List is actually an ImmutableList.
         {

@@ -15,9 +15,12 @@ public abstract class MatchablePool<M extends Matchable<? super M>> // M is for 
 {
     protected final List<M> instances = new ArrayList<>();
 
-    public abstract M getNewUnmatchedInstance();
+    public List<M> getAllCurrentInstances()
+    { return new ArrayList<>(this.instances); }
 
-    public abstract M getNewInstanceThatMatches(M thisMatchable);
+    public abstract M makeNewUnmatchedInstance();
+
+    public abstract M makeNewInstanceThatMatches(M thisMatchable);
 
     public void removeTheseInstances(List<M> instancesToRemove)
     { this.instances.removeAll(instancesToRemove); }
