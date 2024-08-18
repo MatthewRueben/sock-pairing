@@ -19,7 +19,7 @@ public class BatchPairer implements PairingAlgorithm
     }
 
     @Override
-    public <MatchableImplementation extends Matchable<MatchableImplementation>> ComparisonsCounts pair(List<MatchableImplementation> pairables)
+    public <M extends Matchable<? super M>> ComparisonsCounts pair(List<M> pairables)
     {
         ComparisonsCounter counter = new ComparisonsCounter();
         // matchSocks here.

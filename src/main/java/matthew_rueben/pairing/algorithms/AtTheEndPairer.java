@@ -1,6 +1,5 @@
 package matthew_rueben.pairing.algorithms;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,15 +23,15 @@ public class AtTheEndPairer implements PairingAlgorithm
     public String toString() {return "At-The-End Pairer";}
 
     @Override
-    public <MatchableImplementation extends Matchable<MatchableImplementation>> ComparisonsCounts pair(List<MatchableImplementation> pairables)
+    public <M extends Matchable<? super M>> ComparisonsCounts pair(List<M> pairables) // M is for Matchable.
             throws NoMatchRemainingException
     {
         ComparisonsCounter comparisonsCounter = new ComparisonsCounter();
 
-        Iterator<MatchableImplementation> pairableHandler;
+        Iterator<M> pairableHandler;
         while ((pairableHandler = pairables.iterator()).hasNext()) // Iterator resets to beginning of List every loop.
         {
-            final MatchableImplementation pairable_1 = pairableHandler.next();
+            final M pairable_1 = pairableHandler.next();
             logger.debug("ID of first: {}", pairable_1);
             pairableHandler.remove(); // Removes pairable_1 from pairables.
             logger.debug("Removed first.");
@@ -40,7 +39,7 @@ public class AtTheEndPairer implements PairingAlgorithm
             boolean noMatchYet = true;
             while (noMatchYet && pairableHandler.hasNext())
             {
-                final MatchableImplementation pairable_2 = pairableHandler.next();
+                final M pairable_2 = pairableHandler.next();
                 logger.debug("ID of second: {}", pairable_2);
 
                 if (pairable_1.matches(pairable_2))

@@ -23,24 +23,24 @@ public class AsYouGoPairer implements PairingAlgorithm
     public String toString() {return "As-You-Go Pairer";}
 
     @Override
-    public <MatchableImplementation extends Matchable<MatchableImplementation>> ComparisonsCounts pair(List<MatchableImplementation> pairablesHidden)
+    public <M extends Matchable<? super M>> ComparisonsCounts pair(List<M> pairablesHidden) // M is for Matchable.
             throws NoMatchRemainingException
     {
         ComparisonsCounter comparisonsCounter = new ComparisonsCounter();
 
-        List<MatchableImplementation> pairablesRevealed = new ArrayList<>(pairablesHidden.size());
+        List<M> pairablesRevealed = new ArrayList<>(pairablesHidden.size());
 
         while (!pairablesHidden.isEmpty())
         {
-            final MatchableImplementation pairableNewlyRevealed = pairablesHidden.getFirst();
+            final M pairableNewlyRevealed = pairablesHidden.getFirst();
             pairablesHidden.removeFirst();
             logger.debug("ID of new: {}", pairableNewlyRevealed);
 
             boolean noMatchYet = true;
-            Iterator<MatchableImplementation> revealedPairableHandler = pairablesRevealed.iterator(); // Iterator always starts at beginning of List.
+            Iterator<M> revealedPairableHandler = pairablesRevealed.iterator(); // Iterator always starts at beginning of List.
             while (noMatchYet && revealedPairableHandler.hasNext())
             {
-                final MatchableImplementation pairablePreviouslyRevealed = revealedPairableHandler.next();
+                final M pairablePreviouslyRevealed = revealedPairableHandler.next();
                 logger.debug("ID of old: {}", pairablePreviouslyRevealed);
 
                 if (pairableNewlyRevealed.matches(pairablePreviouslyRevealed))
@@ -70,7 +70,7 @@ public class AsYouGoPairer implements PairingAlgorithm
         }
     }
 
-    private <MatchableImplementation extends Matchable<MatchableImplementation>> String buildExceptionDetails(List<MatchableImplementation> pairablesRemaining)
+    private <M extends Matchable<? super M>> String buildExceptionDetails(List<M> pairablesRemaining)
     {
         String exceptionDetails;
         if (pairablesRemaining.size() == 1)
@@ -81,7 +81,7 @@ public class AsYouGoPairer implements PairingAlgorithm
         {
             exceptionDetails = "for objects with IDs: ";
             StringBuilder remainingIDs = new StringBuilder();
-            Iterator<MatchableImplementation> remainingPairableHandler = pairablesRemaining.iterator();
+            Iterator<M> remainingPairableHandler = pairablesRemaining.iterator();
             remainingIDs.append(remainingPairableHandler.next());
 
             while (remainingPairableHandler.hasNext()) // If there are more than one remaining pairables.
