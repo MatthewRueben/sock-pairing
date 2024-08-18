@@ -1,4 +1,4 @@
-package matthew_rueben.pairing.algorithms;
+package matthew_rueben.pairing;
 
 import java.util.ArrayList;
 import java.util.List;

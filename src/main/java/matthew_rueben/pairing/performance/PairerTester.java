@@ -1,5 +1,7 @@
 package matthew_rueben.pairing.performance;
 
+import matthew_rueben.pairing.Matchable;
+import matthew_rueben.pairing.MatchableByNumber;
 import matthew_rueben.pairing.algorithms.*;
 
 import org.apache.logging.log4j.LogManager;

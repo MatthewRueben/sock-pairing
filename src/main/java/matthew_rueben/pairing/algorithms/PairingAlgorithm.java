@@ -1,9 +1,11 @@
 package matthew_rueben.pairing.algorithms;
 
+import matthew_rueben.pairing.Matchable;
+
 import java.util.List;
 
 /**
- * Able to pair a List of matthew_rueben.pairing.algorithms.Matchable objects
+ * Able to pair a List of matthew_rueben.pairing.Matchable objects
  * and return the pairing performance in 
  * a matthew_rueben.pairing.algorithms.ComparisonsCounts object.
  *

@@ -1,5 +1,7 @@
 package matthew_rueben.pairing.algorithms;
 
+import matthew_rueben.pairing.Matchable;
+
 import java.util.List;
 
 /**

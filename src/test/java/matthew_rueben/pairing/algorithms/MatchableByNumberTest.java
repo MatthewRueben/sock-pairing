@@ -1,5 +1,6 @@
 package matthew_rueben.pairing.algorithms;
 
+import matthew_rueben.pairing.MatchableByNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
