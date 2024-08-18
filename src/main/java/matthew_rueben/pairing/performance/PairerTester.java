@@ -50,20 +50,10 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
         int numPairs = maxNumOfPairs; // Later will add sweep functionality, from 1 to max.
         List<CM> pairs = makePairs(numPairs);
 
-        for (List<CM> reorderedPairs : orderedPermutations(pairs))
+        for (List<CM> reorderedPairs : orderedPermutations(pairs)) // That List is actually an ImmutableList.
         {
-            List<CM> copyOfReorderedPairs = new ArrayList<>(numPairs*2);
-            for (CM halfOfAPair : reorderedPairs)
-            {
-                CM copyOfHalfAPair = pool.getNewInstanceThatMatches(halfOfAPair);
-                copyOfReorderedPairs.add(copyOfHalfAPair);
-            }
-            logger.debug(copyOfReorderedPairs);
-
-            ComparisonsCounts comparisons = pairer.pair(copyOfReorderedPairs);
+            ComparisonsCounts comparisons = pairer.pair(new ArrayList<>(reorderedPairs)); // Making a copy because orderedPermutations() actually returns an ImmutableList.
             logger.info("Comparisons: {}.", comparisons.total);
-
-            pool.removeTheseInstances(copyOfReorderedPairs);
         }
         pool.clearAllInstances();
     }
