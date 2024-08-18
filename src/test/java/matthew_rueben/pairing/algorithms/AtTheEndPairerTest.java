@@ -18,13 +18,13 @@ class AtTheEndPairerTest {
     {
         PairingAlgorithm pairer = new AtTheEndPairer();
 
-        List<Matchable> threePairs = new ArrayList<>(6);
-        threePairs.add(new MatchableByNumber(1));
-        threePairs.add(new MatchableByNumber(1));
-        threePairs.add(new MatchableByNumber(2));
-        threePairs.add(new MatchableByNumber(3));
-        threePairs.add(new MatchableByNumber(2));
-        threePairs.add(new MatchableByNumber(3));
+        List<MatchableByNumber> threePairs = new ArrayList<>(6);
+        threePairs.add(MatchableByNumber.createWithID(1));
+        threePairs.add(MatchableByNumber.createWithID(1));
+        threePairs.add(MatchableByNumber.createWithID(2));
+        threePairs.add(MatchableByNumber.createWithID(3));
+        threePairs.add(MatchableByNumber.createWithID(2));
+        threePairs.add(MatchableByNumber.createWithID(3));
 
         ComparisonsCounts counts = pairer.pair(threePairs);
         logger.info("Total comparisons: {}", counts.total);
@@ -37,10 +37,10 @@ class AtTheEndPairerTest {
     {
         PairingAlgorithm pairer = new AtTheEndPairer();
 
-        List<Matchable> triplets = new ArrayList<>(6);
-        triplets.add(new MatchableByNumber(1));
-        triplets.add(new MatchableByNumber(1));
-        triplets.add(new MatchableByNumber(1));
+        List<MatchableByNumber> triplets = new ArrayList<>(6);
+        triplets.add(MatchableByNumber.createWithID(1));
+        triplets.add(MatchableByNumber.createWithID(1));
+        triplets.add(MatchableByNumber.createWithID(1));
 
         assertThrows(NoMatchRemainingException.class,
                 () -> pairer.pair(triplets));

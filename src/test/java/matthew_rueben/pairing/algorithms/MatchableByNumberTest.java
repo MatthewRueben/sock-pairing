@@ -9,9 +9,9 @@ class MatchableByNumberTest {
     @Test
     void matches()
     {
-        MatchableByNumber sock1a = new MatchableByNumber(1);
-        MatchableByNumber sock1b = new MatchableByNumber(1);
-        MatchableByNumber sock2a = new MatchableByNumber(2);
+        MatchableByNumber sock1a = MatchableByNumber.createWithID(1);
+        MatchableByNumber sock1b = MatchableByNumber.createWithID(1);
+        MatchableByNumber sock2a = MatchableByNumber.createWithID(2);
         assertTrue(sock1a.matches(sock1b));
         assertTrue(sock1b.matches(sock1a));
         assertFalse(sock1a.matches(sock2a));
