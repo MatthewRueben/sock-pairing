@@ -10,8 +10,13 @@ public class MatchableByNumber implements Matchable<MatchableByNumber>, Comparab
     @Override
     public String toString() {return String.valueOf(ID);}
     
-    public MatchableByNumber(int id) {
+    private MatchableByNumber(int id) {
         this.ID = id;
+    }
+
+    public static MatchableByNumber createWithID(int id)
+    {
+        return new MatchableByNumber(id);
     }
 
     @Override
