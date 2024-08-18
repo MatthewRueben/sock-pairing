@@ -25,11 +25,6 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
     
     PairerTester(Matchable.Pool<CM> pool) { this.pool = pool; }
 
-    private void getPermutations(List<CM> in)
-    {
-
-    }
-
     private void makePair()
     {
         CM instance1of2 = pool.makeNewUnmatchedInstance();
