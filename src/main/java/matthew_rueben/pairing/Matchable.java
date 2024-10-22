@@ -27,17 +27,20 @@ public interface Matchable<T>
     {
         protected final List<M> instances = new ArrayList<>();
 
+        public int getNumOfCurrentInstances()
+        {   return this.instances.size(); }
+
         public List<M> getAllCurrentInstances()
-        { return new ArrayList<>(this.instances); }
+        {   return new ArrayList<>(this.instances); }
 
         public abstract M makeNewUnmatchedInstance();
 
         public abstract M makeNewInstanceThatMatches(M thisMatchable);
 
         public void removeTheseInstances(List<M> instancesToRemove)
-        { this.instances.removeAll(instancesToRemove); }
+        {   this.instances.removeAll(instancesToRemove); }
 
         public void clearAllInstances()
-        { this.instances.clear(); }
+        {   this.instances.clear(); }
     }
 }

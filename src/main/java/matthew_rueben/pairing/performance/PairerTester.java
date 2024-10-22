@@ -22,43 +22,56 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
     private static final Logger logger = LogManager.getLogger();
 
     private final Matchable.Pool<CM> pool;
-    
-    PairerTester(Matchable.Pool<CM> pool) { this.pool = pool; }
 
-    private void makePair()
-    {
-        CM instance1of2 = pool.makeNewUnmatchedInstance();
-        pool.makeNewInstanceThatMatches(instance1of2);
+    private int numOfPairsInPool;
+
+    private List<CM> selectedPairs;
+
+    PairerTester(Matchable.Pool<CM> pool)
+    {   this.pool = pool;
+        this.numOfPairsInPool = 0;
+    }
+
+    private void addPairToPool()
+    {   logger.info("Adding a pair to the pool.");
+        CM instance1of2 = this.pool.makeNewUnmatchedInstance();
+        this.pool.makeNewInstanceThatMatches(instance1of2);
+        this.numOfPairsInPool++;
+    }
+
+    private void ensurePoolHasAtLeastThisManyPairs(int numOfPairsNeeded)
+    {   while (this.numOfPairsInPool < numOfPairsNeeded)
+        {   this.addPairToPool(); }
+    }
+
+    public void selectNumOfPairs(int numPairs)
+    {   this.ensurePoolHasAtLeastThisManyPairs(numPairs);
+        this.selectedPairs = this.pool.getAllCurrentInstances().subList(0, numPairs*2);
     }
 
     // Might want to pass in *all* the pairers at once so we don't have to do permutations multiple times.
-    public void testAlgorithm(final PairingAlgorithm pairer, int maxNumOfPairs)
-    {
-        logger.info("Testing {}.", pairer);
+    public void testAlgorithmOnSelectedPairs(final PairingAlgorithm pairer)
+    {   logger.info("Testing {}.", pairer);
 
-        int numPairs = maxNumOfPairs; // Later will add sweep functionality, from 1 to max.
-        for (int i = 1; i <= numPairs; i++) { makePair(); }
-        List<CM> pairs = pool.getAllCurrentInstances();
-
-        for (List<CM> reorderedPairs : orderedPermutations(pairs)) // That List is actually an ImmutableList.
+        for (List<CM> reorderedPairables : orderedPermutations(this.selectedPairs)) // That List is actually an ImmutableList.
         {
-            ComparisonsCounts comparisons = pairer.pair(new ArrayList<>(reorderedPairs)); // Making a copy because orderedPermutations() actually returns an ImmutableList.
+            ComparisonsCounts comparisons = pairer.pair(new ArrayList<>(reorderedPairables)); // Making a copy because orderedPermutations() actually returns an ImmutableList.
             logger.info("Comparisons: {}.", comparisons.total);
         }
-        pool.clearAllInstances();
     }
     
     public static void main(String[] args)
     {
-        MatchableByNumber.Pool pool = new MatchableByNumber.Pool();
-        PairerTester<MatchableByNumber> tester = new PairerTester<>(pool);
-
-        //testAYGMatcher.sweepByNumPairs(minNumPairs, maxNumPairs);
+        PairerTester<MatchableByNumber> tester = new PairerTester<>(new MatchableByNumber.Pool()); // Anonymous pool so people don't access it directly here in main().
 
         int maxNumOfPairs = 3;
+        for (int numOfPairs = 1; numOfPairs <= maxNumOfPairs; numOfPairs++)
+        {
+            tester.selectNumOfPairs(numOfPairs);
 
-        tester.testAlgorithm(new AsYouGoPairer(), maxNumOfPairs);
-        //tester.testAlgorithm(BatchPairer.makeBatchPairerWithBatchSize(5));
-        tester.testAlgorithm(new AtTheEndPairer(), maxNumOfPairs);
+            tester.testAlgorithmOnSelectedPairs(new AsYouGoPairer());
+            //tester.testAlgorithmOnCurrentPool(BatchPairer.makeBatchPairerWithBatchSize(5));
+            tester.testAlgorithmOnSelectedPairs(new AtTheEndPairer());
+        }
     }
 }
