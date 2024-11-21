@@ -1,7 +1,9 @@
 package matthew_rueben.pairing.performance;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class ExportingToCSV {
 
 
-    private static void writeRowToCSV(FileWriter writer, Object[] row)
+    public static void writeRowToCSV(Writer writer, Object[] row)
             throws IOException
     {   for (Object element : row) {
             if (element != null) writer.write(element.toString());
@@ -20,9 +22,9 @@ public class ExportingToCSV {
         writer.write("\n");
     }
 
-    public static void exportToCSV(String filePath, String[] headers, Object[][] table)
+    public static void writeTableToCSV(String filePath, String[] headers, Object[][] table)
             throws IOException
-    {   try (FileWriter writer = new FileWriter(filePath))
+    {   try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) // BufferedWriter because there will be many (presumably) small writes.
         {   writeRowToCSV(writer, headers);
             for (Object[] row : table) writeRowToCSV(writer, row);
         }
@@ -58,7 +60,7 @@ public class ExportingToCSV {
         String filePath = pathName + "test" + "@" + dateAndTime + ".csv";
 
         try {
-            ExportingToCSV.exportToCSV(filePath, headers, table);
+            ExportingToCSV.writeTableToCSV(filePath, headers, table);
         } catch (IOException e) {
             System.err.println("Error creating CSV file: " + e.getMessage());
         }
