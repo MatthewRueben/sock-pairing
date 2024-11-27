@@ -13,10 +13,10 @@ import java.time.format.DateTimeFormatter;
 public class ExportingToCSV {
 
 
-    public static void writeRowToCSV(Writer writer, Object[] row)
+    public static <T extends Object> void writeRowToCSV(Writer writer, T[] row)
             throws IOException
-    {   for (Object element : row) {
-            if (element != null) writer.write(element.toString());
+    {   for (T entry : row) {
+            if (entry != null) writer.write(entry.toString());
             writer.write(",");
         }
         writer.write("\n");
