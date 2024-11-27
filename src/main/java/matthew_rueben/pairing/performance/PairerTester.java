@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 import static com.google.common.collect.Collections2.orderedPermutations;
 
-import matthew_rueben.pairing.performance.ExportingToCSV;
-
 /**
  * Tests pairing algorithms.
  *
@@ -35,7 +33,8 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
     private List<CM> selectedPairs;
 
     private Object[][] resultsTable;
-    public String resultsFilePath;
+    public String resultsFilename;
+
 
     PairerTester(Matchable.Pool<CM> pool)
     {   this.pool = pool;
@@ -59,15 +58,22 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
         this.selectedPairs = this.pool.getAllCurrentInstances().subList(0, numPairs*2);
     }
 
+    public void setResultsFilename()
+    {   String dateAndTime = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        dateAndTime = dateAndTime.replace('T','_').replace(':',' ').replace(".","__");
+        this.resultsFilename = "pairing-results" + "@" + dateAndTime + ".csv";
+    }
+
     // Might want to pass in *all* the pairers at once so we don't have to do permutations multiple times.
     public void testAlgorithmOnSelectedPairs(final PairingAlgorithm pairer)
             throws IOException
-    {   int numOfPairs = this.selectedPairs.size()/2;
+    {
+        int numOfPairs = this.selectedPairs.size()/2;
         logger.info("Testing {} on {} pairs.", pairer, numOfPairs);
 
         int orderNumber = 1;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.resultsFilePath, true))) // BufferedWriter because there will be many small writes.
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.resultsFilename, true))) // BufferedWriter because there will be many small writes.
         {   for (List<CM> reorderedPairables : orderedPermutations(this.selectedPairs)) // That List is actually an ImmutableList.
             {
                 ComparisonsCounts comparisons = pairer.pair(new ArrayList<>(reorderedPairables)); // Making a copy because orderedPermutations() actually returns an ImmutableList.
@@ -84,15 +90,14 @@ public class PairerTester<CM extends Comparable<CM> & Matchable<CM>> // CM is fo
         PairerTester<MatchableByNumber> tester = new PairerTester<>(new MatchableByNumber.Pool()); // Anonymous pool so people don't access it directly here in main().
 
         int maxNumOfPairs = 5;
-        PairingAlgorithm[] algorithmsToTest = {new AsYouGoPairer(), new AtTheEndPairer()}; // BatchPairer.makeBatchPairerWithBatchSize(5)
 
-        String pathName = "/Users/matth/Downloads/";
-        String dateAndTime = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        dateAndTime = dateAndTime.replace('T','_').replace(':',' ').replace(".","__");
-        tester.resultsFilePath = pathName + "sock-pairing-results" + "@" + dateAndTime + ".csv";
+        PairingAlgorithm[] algorithmsToTest = {new AsYouGoPairer(),
+                new AtTheEndPairer()}; // BatchPairer.makeBatchPairerWithBatchSize(5)
+
+        tester.setResultsFilename();
 
         // Write header to results file.
-        try (FileWriter writer = new FileWriter(tester.resultsFilePath, true))
+        try (FileWriter writer = new FileWriter(tester.resultsFilename, true))
         {   ExportingToCSV.writeRowToCSV(writer, new Object[]{"Algorithm", "Number of Pairs", "Order Number", "Comparisons"});   }
 
         for (int numOfPairs = 1; numOfPairs <= maxNumOfPairs; numOfPairs++)
